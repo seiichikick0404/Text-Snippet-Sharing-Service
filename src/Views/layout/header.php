@@ -21,13 +21,13 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarColor01">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="create">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">New Snippet</a>
+                    <a class="nav-link" href="create">New Snippet</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Snippet Library</a>
+                    <a class="nav-link" href="library">Snippet Library</a>
                 </li>
             </ul>
         </div>
