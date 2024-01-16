@@ -44,3 +44,8 @@
         </div>
     </div>
 </div>
+
+<!-- <script src="../../library/monaco-editor/min/vs/loader.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+<script src="../../public/js/editor.js"></script>
+

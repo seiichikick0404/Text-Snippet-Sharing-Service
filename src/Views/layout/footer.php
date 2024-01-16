@@ -7,7 +7,5 @@
     </div>
 </footer>
 
-<script src="/library/monaco-editor/min/vs/loader.js"></script>
-<script src="/public/js/editor.js"></script>
 </body>
 </html>

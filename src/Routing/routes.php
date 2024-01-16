@@ -7,15 +7,15 @@ use Response\Render\HTMLRenderer;
 use Response\Render\JSONRenderer;
 
 return [
-    'create'=>function(): HTTPRenderer{
+    'snippet/create'=>function(): HTTPRenderer{
         // データが必要な場合ここで取得
         return new HTMLRenderer('component/createSnippet');
     },
-    'library'=>function(): HTTPRenderer{
+    'snippet/library'=>function(): HTTPRenderer{
          // TODO: スニペット一覧をDBから取得する
          return new HTMLRenderer('component/library');
     },
-    'show'=>function(): HTTPRenderer{
+    'snippet/show'=>function(): HTTPRenderer{
         // TODO: 詳細情報をDBから取得する
         return new HTMLRenderer('component/show');
    },
