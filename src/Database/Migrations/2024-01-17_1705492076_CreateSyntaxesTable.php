@@ -11,10 +11,8 @@ class CreateSyntaxesTable implements SchemaMigration
         // マイグレーションロジックをここに追加してください
         return [
             "CREATE TABLE syntaxes (
-                id INT PRIMARY KEY AUTO_INCREMENT,
-                name VARCHAR(255) NOT NULL,
-                snippet_id INT,
-                FOREIGN KEY (snippet_id) REFERENCES snippets(id) ON DELETE SET NULL
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255) NOT NULL
             )"
         ];
     }
