@@ -16,10 +16,6 @@ class SyntaxesInitSeeder extends AbstractSeeder {
             'data_type' => 'string',
             'column_name' => 'name'
         ],
-        [
-            'data_type' => 'int',
-            'column_name' => 'snippet_id'
-        ],
     ];
 
     public function createRowData(): array
@@ -47,7 +43,11 @@ class SyntaxesInitSeeder extends AbstractSeeder {
 
         $syntaxesRowData = [];
         foreach ($syntaxes as $syntax) {
-            
+            $syntaxData = [
+                $syntax,
+            ];
+
+            array_push($syntaxesRowData, $syntaxData);
         }
 
         return $syntaxesRowData;
