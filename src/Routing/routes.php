@@ -8,15 +8,16 @@ use Response\Render\JSONRenderer;
 
 return [
     'snippet/create'=>function(): HTTPRenderer{
-        // データが必要な場合ここで取得
-        return new HTMLRenderer('component/createSnippet');
+        $syntaxes = DatabaseHelper::getSyntaxes();
+
+        return new HTMLRenderer('component/createSnippet', ['syntaxes' => $syntaxes]);
     },
     'snippet/library'=>function(): HTTPRenderer{
          // TODO: スニペット一覧をDBから取得する
          return new HTMLRenderer('component/library');
     },
     'snippet/save'=>function(): HTTPRenderer{
-        // TODO: 詳細情報をDBから取得する
+        // TODO: バリデーションと保存、問題なければ固有ページへ遷移
         var_dump($_REQUEST);
         exit;
         return new HTMLRenderer('component/show');

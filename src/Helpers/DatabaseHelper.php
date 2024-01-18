@@ -87,4 +87,25 @@ class DatabaseHelper
 
         return $parts;
     }
+
+    public static function getSyntaxes(): array
+    {
+        $db = new MySQLWrapper();
+
+        $sql = "SELECT * FROM syntaxes";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        // 全ての結果を取得
+        $dataList = [];
+        while ($data = $result->fetch_assoc()) {
+            $dataList[] = $data;
+        }
+
+        if (!$dataList) throw new Exception('Could not find a data in database');
+
+        return $dataList;
+    }
 }

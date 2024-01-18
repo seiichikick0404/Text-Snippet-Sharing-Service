@@ -30,12 +30,12 @@
                 <!-- 構文選択フォーム -->
                 <div class="mb-3">
                     <label for="syntax" class="form-label">Syntax</label>
-                    <select name="" class="form-select" id="syntax">
-                        <option value="text">Text</option>
-                        <option value="python">Python</option>
-                        <option value="java">Java</option>
-                        <option value="javascript">JavaScript</option>
-                        <!-- 他の言語オプションを追加可能 -->
+                    <select name="syntax" class="form-select" id="syntax">
+                    <?php foreach ($syntaxes as $syntax): ?>
+                        <option value="<?php echo htmlspecialchars($syntax['id']); ?>">
+                            <?php echo htmlspecialchars(ucfirst($syntax['name'])); ?>
+                        </option>
+                    <?php endforeach; ?>
                     </select>
                 </div>
 
