@@ -15,6 +15,12 @@ return [
          // TODO: スニペット一覧をDBから取得する
          return new HTMLRenderer('component/library');
     },
+    'snippet/save'=>function(): HTTPRenderer{
+        // TODO: 詳細情報をDBから取得する
+        var_dump($_REQUEST);
+        exit;
+        return new HTMLRenderer('component/show');
+   },
     'snippet/show'=>function(): HTTPRenderer{
         // TODO: 詳細情報をDBから取得する
         return new HTMLRenderer('component/show');
