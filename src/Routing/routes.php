@@ -3,8 +3,11 @@
 use Helpers\DatabaseHelper;
 use Helpers\ValidationHelper;
 use Response\HTTPRenderer;
+use Helpers\CreateSnippetHelper;
 use Response\Render\HTMLRenderer;
 use Response\Render\JSONRenderer;
+
+
 
 return [
     'snippet/create'=>function(): HTTPRenderer{
@@ -17,9 +20,10 @@ return [
          return new HTMLRenderer('component/library');
     },
     'snippet/save'=>function(): HTTPRenderer{
-        // TODO: バリデーションと保存、問題なければ固有ページへ遷移
-        var_dump($_REQUEST);
-        exit;
+        $validatedData = ValidationHelper::createSnippetPost($_POST);
+        $uniquePath = CreateSnippetHelper::generatePath();
+        CreateSnippetHelper::createSnippet($validatedData, $uniquePath);
+
         return new HTMLRenderer('component/show');
    },
     'snippet/show'=>function(): HTTPRenderer{

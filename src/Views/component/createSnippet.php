@@ -23,7 +23,7 @@
                         <option value="10min">10min</option>
                         <option value="1hour">1h</option>
                         <option value="1day">1day</option>
-                        <option value="forever">never</option>
+                        <option value="forever">forever</option>
                     </select>
                 </div>
 
@@ -39,7 +39,7 @@
                     </select>
                 </div>
 
-                <input type="hidden" id="editorContent" name="editorContent">
+                <input type="hidden" id="content" name="content">
 
                 <!-- アップロードボタン -->
                 <div class="mb-3">

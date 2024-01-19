@@ -13,6 +13,6 @@ require(["vs/editor/editor.main"], function () {
       // エディタの現在の内容を取得
       var editorContent = editor.getValue();
       // 隠れた入力フィールドにエディタの内容を設定
-      document.getElementById("editorContent").value = editorContent;
+      document.getElementById("content").value = editorContent;
     });
 });

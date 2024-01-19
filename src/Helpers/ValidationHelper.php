@@ -32,4 +32,25 @@ class ValidationHelper
         // 文字列がすべてのチェックをパスしたら、そのまま返す
         return $value;
     }
+
+    public static function createSnippetPost($postData): array
+    {
+        try {
+            $postData['title'] = self::string($postData['title'], 1, 255);
+
+            $validExpirations = ["10min", "1hour", "1day", "never"];
+            if (!in_array($postData['expiration'], $validExpirations)) {
+                throw new \InvalidArgumentException("Invalid expiration value.");
+            }
+
+            $postData['syntax'] = self::integer($postData['syntax']);
+
+            $postData['content'] = self::string($postData['content'], 1);
+
+        } catch (\Exception $e) {
+            throw new \InvalidArgumentException("Invalid expiration value.");
+        }
+
+        return $postData;
+    }
 }
