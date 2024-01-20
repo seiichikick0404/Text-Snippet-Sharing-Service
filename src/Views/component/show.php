@@ -26,7 +26,7 @@ $syntaxes = [
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
             <!-- タイトル -->
-            <h2><i class="fas fa-code"></i> Snippet Title</h2>
+            <h2><i class="fas fa-code"></i> <?php echo htmlspecialchars($data['title']) ?></h2>
 
             <!-- 有効期限と作成日 -->
             <p><i class="far fa-clock"></i> Expiration: <?php echo htmlspecialchars($data['expiration']) ?></p>
@@ -48,7 +48,14 @@ $syntaxes = [
     <!-- Monaco Editor Container -->
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div id="container" style="height: 600px; border: 1px solid grey;"></div>
+            <div id="container" style="height: 600px; border: 1px solid grey;"
+                data-content="<?php echo htmlspecialchars($data['content']); ?>"
+                data-language="<?php echo htmlspecialchars(strtolower($syntaxes[$data['syntax_id']])); ?>">
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Monaco Editor Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+<script src="../../public/js/showEditor.js"></script>
