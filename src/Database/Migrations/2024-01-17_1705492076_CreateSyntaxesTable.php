@@ -4,17 +4,15 @@ namespace Database\Migrations;
 
 use Database\SchemaMigration;
 
-class CreateStudentsTable implements SchemaMigration
+class CreateSyntaxesTable implements SchemaMigration
 {
     public function up(): array
     {
         // マイグレーションロジックをここに追加してください
         return [
-            "CREATE TABLE students (
-                id INT PRIMARY KEY AUTO_INCREMENT,
-                name VARCHAR(100),
-                age INT,
-                major VARCHAR(50)
+            "CREATE TABLE syntaxes (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255) NOT NULL
             )"
         ];
     }
@@ -22,6 +20,6 @@ class CreateStudentsTable implements SchemaMigration
     public function down(): array
     {
         // ロールバックロジックを追加してください
-        return [];
+        return ["DROP TABLE syntaxes"];
     }
 }

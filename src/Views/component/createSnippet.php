@@ -8,44 +8,49 @@
 
         <!-- Form Elements Container -->
         <div class="col-md-4">
-            <!-- タイトル入力フォーム -->
-            <div class="mb-3">
-                <label for="snippetTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="snippetTitle" placeholder="Enter title">
-            </div>
+            <!-- Form start -->
+            <form action="save" method="post" id="snippetForm">
+                <!-- タイトル入力フォーム -->
+                <div class="mb-3">
+                    <label for="snippetTitle" class="form-label">Title</label>
+                    <input type="text" name="title" class="form-control" id="snippetTitle" placeholder="Enter title">
+                </div>
 
-            <!-- 有効期限選択フォーム -->
-            <div class="mb-3">
-                <label for="expiration" class="form-label">Expiration</label>
-                <select class="form-select" id="expiration">
-                <option value="10min">10min</option>
-                <option value="1hour">1h</option>
-                <option value="1day">1day</option>
-                <option value="forever">never</option>
-                </select>
-            </div>
+                <!-- 有効期限選択フォーム -->
+                <div class="mb-3">
+                    <label for="expiration" class="form-label">Expiration</label>
+                    <select name="expiration" class="form-select" id="expiration">
+                        <option value="10min">10min</option>
+                        <option value="1hour">1h</option>
+                        <option value="1day">1day</option>
+                        <option value="forever">forever</option>
+                    </select>
+                </div>
 
-            <!-- 構文選択フォーム -->
-            <div class="mb-3">
-                <label for="syntax" class="form-label">Syntax</label>
-                <select class="form-select" id="syntax">
-                    <option value="text">Text</option>
-                    <option value="python">Python</option>
-                    <option value="java">Java</option>
-                    <option value="javascript">JavaScript</option>
-                    <!-- 他の言語オプションを追加可能 -->
-                </select>
-            </div>
+                <!-- 構文選択フォーム -->
+                <div class="mb-3">
+                    <label for="syntax" class="form-label">Syntax</label>
+                    <select name="syntax" class="form-select" id="syntax">
+                    <?php foreach ($syntaxes as $syntax): ?>
+                        <option value="<?php echo htmlspecialchars($syntax['id']); ?>">
+                            <?php echo htmlspecialchars(ucfirst($syntax['name'])); ?>
+                        </option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
 
-            <!-- アップロードボタン -->
-            <div class="mb-3">
-                <button type="submit" class="btn btn-dark">Upload</button>
-            </div>
+                <input type="hidden" id="content" name="content">
+
+                <!-- アップロードボタン -->
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-dark">Upload</button>
+                </div>
+            </form>
+            <!-- Form end -->
         </div>
     </div>
 </div>
 
-<!-- <script src="../../library/monaco-editor/min/vs/loader.js"></script> -->
+<!-- Monaco Editor Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
 <script src="../../public/js/editor.js"></script>
-
