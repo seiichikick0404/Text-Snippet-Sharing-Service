@@ -11,6 +11,8 @@ class CreateSnippetHelper
         DatabaseHelper::storeSnippet($validatedData, $uniquePath);
 
         // TODO 新規パスに遷移する
+        header("Location: ../snippet/show?uniqueKey=" . $uniquePath);
+        exit;
     }
     /**
      * ランダムなデータと現在のタイムスタンプを組み合わせて一意な値を生成

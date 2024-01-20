@@ -125,12 +125,28 @@ class DatabaseHelper
             $data['content'],
             $uniquePath,
             $expirationDate,
-            $data['syntax_id']
+            $data['syntax']
         );
 
         if (!$stmt->execute()) {
             throw new Exception('Failed to store snippet: ' . $stmt->error);
         }
+    }
+
+    public static function getSnippet(string $path): array
+    {
+        $db = new MySQLWrapper();
+
+        $stmt = $db->prepare("SELECT * FROM snippets WHERE url = ?");
+        $stmt->bind_param('s', $path);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $snippet = $result->fetch_assoc();
+
+        if (!$snippet) throw new Exception('Could not find a single snippet in database');
+
+        return $snippet;
     }
 
     private static function processExpiration($expiration): ?string
@@ -155,4 +171,6 @@ class DatabaseHelper
 
         return $now->format('Y-m-d H:i:s');
     }
+
+
 }
