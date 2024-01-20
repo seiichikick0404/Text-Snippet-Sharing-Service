@@ -35,12 +35,17 @@ $syntaxes = [
             <!-- シンタックス -->
             <p><i class="fas fa-cogs"></i> Syntax: <?php echo htmlspecialchars($syntaxes[$data['syntax_id']]) ?></p>
 
-            <!-- コピーボタン -->
+            <!-- コピーボタンとコピーメッセージ -->
             <div class="text-end mb-3">
-                <button class="btn btn-dark" onclick="copySnippetContent()">
-                <i class="fas fa-clipboard"></i> 
-                <i class="fas fa-copy">Copy code</i>
+                
+
+                <!-- コピーボタン -->
+                <button class="btn btn-dark" id="copy-btn">
+                    <i class="fas fa-clipboard"></i> 
+                    <i class="fas fa-copy">Copy code</i>
                 </button>
+                <!-- コピーメッセージ -->
+                <span id="copy-message" class="copy-message-style" style="display: none;">Copied!</span>
             </div>
         </div>
     </div>
