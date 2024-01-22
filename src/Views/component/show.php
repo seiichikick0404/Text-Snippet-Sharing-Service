@@ -26,7 +26,7 @@ $syntaxes = [
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
             <!-- タイトル -->
-            <h2><i class="fas fa-code"></i> Snippet Title</h2>
+            <h2><i class="fas fa-code"></i> <?php echo htmlspecialchars($data['title']) ?></h2>
 
             <!-- 有効期限と作成日 -->
             <p><i class="far fa-clock"></i> Expiration: <?php echo htmlspecialchars($data['expiration']) ?></p>
@@ -35,12 +35,17 @@ $syntaxes = [
             <!-- シンタックス -->
             <p><i class="fas fa-cogs"></i> Syntax: <?php echo htmlspecialchars($syntaxes[$data['syntax_id']]) ?></p>
 
-            <!-- コピーボタン -->
+            <!-- コピーボタンとコピーメッセージ -->
             <div class="text-end mb-3">
-                <button class="btn btn-dark" onclick="copySnippetContent()">
-                <i class="fas fa-clipboard"></i> 
-                <i class="fas fa-copy">Copy code</i>
+                
+
+                <!-- コピーボタン -->
+                <button class="btn btn-dark" id="copy-btn">
+                    <i class="fas fa-clipboard"></i> 
+                    <i class="fas fa-copy">Copy code</i>
                 </button>
+                <!-- コピーメッセージ -->
+                <span id="copy-message" class="copy-message-style" style="display: none;">Copied!</span>
             </div>
         </div>
     </div>
@@ -48,7 +53,14 @@ $syntaxes = [
     <!-- Monaco Editor Container -->
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div id="container" style="height: 600px; border: 1px solid grey;"></div>
+            <div id="container" style="height: 600px; border: 1px solid grey;"
+                data-content="<?php echo htmlspecialchars($data['content']); ?>"
+                data-language="<?php echo htmlspecialchars(strtolower($syntaxes[$data['syntax_id']])); ?>">
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Monaco Editor Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+<script src="../../public/js/showEditor.js"></script>

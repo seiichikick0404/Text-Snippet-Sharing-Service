@@ -27,7 +27,12 @@ return [
         return new HTMLRenderer('component/show');
    },
     'snippet/show'=>function(): HTTPRenderer{
-        $path = $_GET['uniqueKey'];
+        $path = $_GET['uniqueKey'] ?? null;
+
+        if (!$path) {
+            header("Location: create");
+            exit;
+        }
         $path = ValidationHelper::string($path);
         $data = DatabaseHelper::getSnippet($path);
 

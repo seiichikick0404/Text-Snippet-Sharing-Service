@@ -144,9 +144,26 @@ class DatabaseHelper
         $result = $stmt->get_result();
         $snippet = $result->fetch_assoc();
 
-        if (!$snippet) throw new Exception('Could not find a single snippet in database');
+        // スニペットが見つからない、または有効期限が過ぎている場合にリダイレクト
+        self::redirectIfInvalid($snippet);
 
         return $snippet;
+    }
+
+    private static function redirectIfInvalid($snippet): void
+    {
+        if (!$snippet) {
+            header("Location: ../snippet/create");
+            exit;
+        }
+
+        $expiration = new DateTime($snippet['expiration']);
+        $now = new DateTime();
+
+        if ($expiration < $now) {
+            header("Location: ../snippet/create");
+            exit;
+        }
     }
 
     private static function processExpiration($expiration): ?string
