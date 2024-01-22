@@ -31,13 +31,14 @@
                 <div class="mb-3">
                     <label for="syntax" class="form-label">Syntax</label>
                     <select name="syntax" class="form-select" id="syntax">
-                    <?php foreach ($syntaxes as $syntax): ?>
-                        <option value="<?php echo htmlspecialchars($syntax['id']); ?>">
-                            <?php echo htmlspecialchars(ucfirst($syntax['name'])); ?>
-                        </option>
-                    <?php endforeach; ?>
+                        <?php foreach ($syntaxes as $syntax): ?>
+                            <option value="<?php echo htmlspecialchars($syntax['id']); ?>" <?php echo ($syntax['name'] === 'javascript') ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars(ucfirst($syntax['name'])); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
+
 
                 <input type="hidden" id="content" name="content">
 
