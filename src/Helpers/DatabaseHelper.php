@@ -155,11 +155,12 @@ class DatabaseHelper
         $db = new MySQLWrapper();
 
         // 現在の日時よりも後の有効期限、または有効期限がNULLのスニペットを選択
-        $sql = "SELECT * 
+        $sql = "SELECT *
                 FROM snippets
                 INNER JOIN syntaxes ON snippets.syntax_id = syntaxes.id
-                WHERE expiration > NOW() 
-                OR expiration IS NULL";
+                WHERE expiration > NOW()
+                OR expiration IS NULL
+                ORDER BY snippets.id DESC";
 
         $stmt = $db->prepare($sql);
         $stmt->execute();
