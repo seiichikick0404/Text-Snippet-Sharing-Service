@@ -144,9 +144,19 @@ class DatabaseHelper
         $result = $stmt->get_result();
         $snippet = $result->fetch_assoc();
 
-        // スニペットが見つからない、または有効期限が過ぎている場合にリダイレクト
+        // スニペットが見つからない場合にリダイレクト
         self::redirectIfInvalid($snippet);
 
+        $snippet['status'] = true;
+        if ($snippet['expiration'] !== null) {
+            $expiration = new DateTime($snippet['expiration']);
+            $now = new DateTime();
+
+            // 有効期限が有効化チェック
+            if ($expiration < $now) {
+                $snippet['status'] = false;
+            }
+        }
         return $snippet;
     }
 
@@ -183,18 +193,6 @@ class DatabaseHelper
         if (!$snippet) {
             header("Location: ../snippet/create");
             exit;
-        }
-
-        // expirationがnullの場合は永続的なスニペットとみなす
-        if ($snippet['expiration'] !== null) {
-            $expiration = new DateTime($snippet['expiration']);
-            $now = new DateTime();
-
-            // 有効期限が現在時刻よりも前の場合、リダイレクト
-            if ($expiration < $now) {
-                header("Location: ../snippet/create");
-                exit;
-            }
         }
     }
 
