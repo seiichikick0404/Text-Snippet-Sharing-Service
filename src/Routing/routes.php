@@ -16,8 +16,8 @@ return [
         return new HTMLRenderer('component/createSnippet', ['syntaxes' => $syntaxes]);
     },
     'snippet/library'=>function(): HTTPRenderer{
-         // TODO: スニペット一覧をDBから取得する
-         return new HTMLRenderer('component/library');
+         $snippets = DatabaseHelper::getActiveSnippets();
+         return new HTMLRenderer('component/library', ['snippets' => $snippets]);
     },
     'snippet/save'=>function(): HTTPRenderer{
         $validatedData = ValidationHelper::createSnippetPost($_POST);

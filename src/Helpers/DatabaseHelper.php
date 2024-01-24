@@ -144,23 +144,53 @@ class DatabaseHelper
         $result = $stmt->get_result();
         $snippet = $result->fetch_assoc();
 
-        // スニペットが見つからない、または有効期限が過ぎている場合にリダイレクト
+        // スニペットが見つからない場合にリダイレクト
         self::redirectIfInvalid($snippet);
 
+        $snippet['status'] = true;
+        if ($snippet['expiration'] !== null) {
+            $expiration = new DateTime($snippet['expiration']);
+            $now = new DateTime();
+
+            // 有効期限が有効化チェック
+            if ($expiration < $now) {
+                $snippet['status'] = false;
+            }
+        }
         return $snippet;
+    }
+
+    public static function getActiveSnippets(): array
+    {
+        $db = new MySQLWrapper();
+
+        // 現在の日時よりも後の有効期限、または有効期限がNULLのスニペットを選択
+        $sql = "SELECT *
+                FROM snippets
+                INNER JOIN syntaxes ON snippets.syntax_id = syntaxes.id
+                WHERE expiration > NOW()
+                OR expiration IS NULL
+                ORDER BY snippets.id DESC";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        // 全ての結果を取得
+        $dataList = [];
+        while ($data = $result->fetch_assoc()) {
+            $dataList[] = $data;
+        }
+
+        if (!$dataList) throw new Exception('Could not find a data in database');
+
+        return $dataList;
     }
 
     private static function redirectIfInvalid($snippet): void
     {
         if (!$snippet) {
-            header("Location: ../snippet/create");
-            exit;
-        }
-
-        $expiration = new DateTime($snippet['expiration']);
-        $now = new DateTime();
-
-        if ($expiration < $now) {
             header("Location: ../snippet/create");
             exit;
         }

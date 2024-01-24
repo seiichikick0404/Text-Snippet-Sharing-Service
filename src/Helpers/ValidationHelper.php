@@ -38,7 +38,7 @@ class ValidationHelper
         try {
             $postData['title'] = self::string($postData['title'], 1, 255);
 
-            $validExpirations = ["10min", "1hour", "1day", "never"];
+            $validExpirations = ["10min", "1hour", "1day", "forever"];
             if (!in_array($postData['expiration'], $validExpirations)) {
                 throw new \InvalidArgumentException("Invalid expiration value.");
             }

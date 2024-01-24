@@ -25,28 +25,44 @@ $syntaxes = [
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
-            <!-- タイトル -->
-            <h2><i class="fas fa-code"></i> <?php echo htmlspecialchars($data['title']) ?></h2>
+            <?php if ($data['status']): ?>
+                <!-- タイトル -->
+                <h2><i class="fas fa-code"></i> <?php echo htmlspecialchars($data['title']) ?></h2>
 
-            <!-- 有効期限と作成日 -->
-            <p><i class="far fa-clock"></i> Expiration: <?php echo htmlspecialchars($data['expiration']) ?></p>
-            <p><i class="far fa-calendar-alt"></i> Created Date: <?php echo htmlspecialchars($data['created_at']) ?></p>
+                <!-- 有効期限と作成日 -->
+                <p>
+                    <i class="far fa-clock"></i>
+                    Expiration:
+                    <?php
+                    echo $data['expiration'] ? htmlspecialchars($data['expiration']) : 'forever';
+                    ?>
+                </p>
 
-            <!-- シンタックス -->
-            <p><i class="fas fa-cogs"></i> Syntax: <?php echo htmlspecialchars($syntaxes[$data['syntax_id']]) ?></p>
+                <p><i class="far fa-calendar-alt"></i> Created Date: <?php echo htmlspecialchars($data['created_at']) ?></p>
 
-            <!-- コピーボタンとコピーメッセージ -->
-            <div class="text-end mb-3">
-                
+                <!-- シンタックス -->
+                <p><i class="fas fa-cogs"></i> Syntax: <?php echo htmlspecialchars($syntaxes[$data['syntax_id']]) ?></p>
 
-                <!-- コピーボタン -->
-                <button class="btn btn-dark" id="copy-btn">
-                    <i class="fas fa-clipboard"></i> 
-                    <i class="fas fa-copy">Copy code</i>
-                </button>
-                <!-- コピーメッセージ -->
-                <span id="copy-message" class="copy-message-style" style="display: none;">Copied!</span>
-            </div>
+                <!-- コピーボタンとコピーメッセージ -->
+                <div class="text-end mb-3">
+                    <!-- コピーボタン -->
+                    <button class="btn btn-dark" id="copy-btn">
+                        <i class="fas fa-clipboard"></i>
+                        <i class="fas fa-copy">Copy code</i>
+                    </button>
+                    <!-- コピーメッセージ -->
+                    <span id="copy-message" class="copy-message-style" style="display: none;">Copied!</span>
+                </div>
+            <?php else: ?>
+                <!-- スニペットが無効（期限切れ）の場合のメッセージ表示 -->
+                <div class="container mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 text-center">
+                            <h2>Expired Snippet</h2>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -62,5 +78,7 @@ $syntaxes = [
 </div>
 
 <!-- Monaco Editor Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
-<script src="../../public/js/showEditor.js"></script>
+<?php if ($data['status']): ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+    <script src="../../public/js/showEditor.js"></script>
+<?php endif; ?>
