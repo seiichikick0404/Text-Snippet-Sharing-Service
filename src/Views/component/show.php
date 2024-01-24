@@ -29,7 +29,14 @@ $syntaxes = [
             <h2><i class="fas fa-code"></i> <?php echo htmlspecialchars($data['title']) ?></h2>
 
             <!-- 有効期限と作成日 -->
-            <p><i class="far fa-clock"></i> Expiration: <?php echo htmlspecialchars($data['expiration']) ?></p>
+            <p>
+                <i class="far fa-clock"></i>
+                Expiration:
+                <?php
+                echo $data['expiration'] ? htmlspecialchars($data['expiration']) : 'forever';
+                ?>
+            </p>
+
             <p><i class="far fa-calendar-alt"></i> Created Date: <?php echo htmlspecialchars($data['created_at']) ?></p>
 
             <!-- シンタックス -->
@@ -37,11 +44,9 @@ $syntaxes = [
 
             <!-- コピーボタンとコピーメッセージ -->
             <div class="text-end mb-3">
-                
-
                 <!-- コピーボタン -->
                 <button class="btn btn-dark" id="copy-btn">
-                    <i class="fas fa-clipboard"></i> 
+                    <i class="fas fa-clipboard"></i>
                     <i class="fas fa-copy">Copy code</i>
                 </button>
                 <!-- コピーメッセージ -->

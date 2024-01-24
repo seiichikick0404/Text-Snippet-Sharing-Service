@@ -150,6 +150,33 @@ class DatabaseHelper
         return $snippet;
     }
 
+    public static function getActiveSnippets(): array
+    {
+        $db = new MySQLWrapper();
+
+        // 現在の日時よりも後の有効期限、または有効期限がNULLのスニペットを選択
+        $sql = "SELECT * 
+                FROM snippets
+                INNER JOIN syntaxes ON snippets.syntax_id = syntaxes.id
+                WHERE expiration > NOW() 
+                OR expiration IS NULL";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        // 全ての結果を取得
+        $dataList = [];
+        while ($data = $result->fetch_assoc()) {
+            $dataList[] = $data;
+        }
+
+        if (!$dataList) throw new Exception('Could not find a data in database');
+
+        return $dataList;
+    }
+
     private static function redirectIfInvalid($snippet): void
     {
         if (!$snippet) {
@@ -157,12 +184,16 @@ class DatabaseHelper
             exit;
         }
 
-        $expiration = new DateTime($snippet['expiration']);
-        $now = new DateTime();
+        // expirationがnullの場合は永続的なスニペットとみなす
+        if ($snippet['expiration'] !== null) {
+            $expiration = new DateTime($snippet['expiration']);
+            $now = new DateTime();
 
-        if ($expiration < $now) {
-            header("Location: ../snippet/create");
-            exit;
+            // 有効期限が現在時刻よりも前の場合、リダイレクト
+            if ($expiration < $now) {
+                header("Location: ../snippet/create");
+                exit;
+            }
         }
     }
 
