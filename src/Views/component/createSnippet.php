@@ -14,6 +14,9 @@
                 <div class="mb-3">
                     <label for="snippetTitle" class="form-label">Title</label>
                     <input type="text" name="title" class="form-control" id="snippetTitle" placeholder="Enter title">
+                    <?php if (isset($errors['title'])): ?>
+                        <div class="text-danger"><?php echo htmlspecialchars($errors['title']); ?></div>
+                    <?php endif; ?>
                 </div>
 
                 <!-- 有効期限選択フォーム -->
@@ -25,6 +28,9 @@
                         <option value="1day">1day</option>
                         <option value="forever">forever</option>
                     </select>
+                    <?php if (isset($errors['expiration'])): ?>
+                        <div class="text-danger"><?php echo htmlspecialchars($errors['expiration']); ?></div>
+                    <?php endif; ?>
                 </div>
 
                 <!-- 構文選択フォーム -->
@@ -37,8 +43,10 @@
                             </option>
                         <?php endforeach; ?>
                     </select>
+                    <?php if (isset($errors['syntax'])): ?>
+                        <div class="text-danger"><?php echo htmlspecialchars($errors['syntax']); ?></div>
+                    <?php endif; ?>
                 </div>
-
 
                 <input type="hidden" id="content" name="content">
 

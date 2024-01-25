@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 use Helpers\DatabaseHelper;
 use Helpers\ValidationHelper;
@@ -12,17 +13,25 @@ use Response\Render\JSONRenderer;
 return [
     'snippet/create'=>function(): HTTPRenderer{
         $syntaxes = DatabaseHelper::getSyntaxes();
+        $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
+        unset($_SESSION['errors']);
 
-        return new HTMLRenderer('component/createSnippet', ['syntaxes' => $syntaxes]);
+        return new HTMLRenderer('component/createSnippet', ['syntaxes' => $syntaxes, 'errors' => $errors]);
     },
     'snippet/library'=>function(): HTTPRenderer{
          $snippets = DatabaseHelper::getActiveSnippets();
          return new HTMLRenderer('component/library', ['snippets' => $snippets]);
     },
     'snippet/save'=>function(): HTTPRenderer{
-        $validatedData = ValidationHelper::createSnippetPost($_POST);
+        $errors = ValidationHelper::createSnippetPost($_POST);
+        if (count($errors) > 0) {
+            $_SESSION['errors'] = $errors;
+            header("Location: ../snippet/create");
+            exit;
+        }
+
         $uniquePath = CreateSnippetHelper::generatePath();
-        CreateSnippetHelper::createSnippet($validatedData, $uniquePath);
+        CreateSnippetHelper::createSnippet($_POST, $uniquePath);
 
         return new HTMLRenderer('component/show');
    },

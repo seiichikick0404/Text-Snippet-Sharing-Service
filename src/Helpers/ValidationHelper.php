@@ -35,22 +35,56 @@ class ValidationHelper
 
     public static function createSnippetPost($postData): array
     {
-        try {
-            $postData['title'] = self::string($postData['title'], 1, 255);
+        $errors = [];
 
-            $validExpirations = ["10min", "1hour", "1day", "forever"];
-            if (!in_array($postData['expiration'], $validExpirations)) {
-                throw new \InvalidArgumentException("Invalid expiration value.");
+        // Title empty check
+        if (empty($postData['title'])) {
+            $errors['title'] = "Title is required.";
+        } else {
+            // Title length check
+            try {
+                self::string($postData['title'], 1, 255);
+            } catch (\Exception $e) {
+                $errors['title'] = "The title must be within 255 characters.";
             }
-
-            $postData['syntax'] = self::integer($postData['syntax']);
-
-            $postData['content'] = self::string($postData['content'], 1);
-
-        } catch (\Exception $e) {
-            throw new \InvalidArgumentException("Invalid expiration value.");
         }
 
-        return $postData;
+        // Expiration validation
+        $validExpirations = ["10min", "1hour", "1day", "forever"];
+        if (empty($postData['expiration']) || !in_array($postData['expiration'], $validExpirations)) {
+            $errors['expiration'] = "Invalid expiration value selected.";
+        }
+
+        // Syntax validation
+        if (empty($postData['syntax'])) {
+            $errors['syntax'] = "Syntax selection is required.";
+        } else {
+            // Syntax ID type check
+            try {
+                self::integer($postData['syntax']);
+            } catch (\Exception $e) {
+                $errors['syntax'] = "Invalid syntax selected.";
+            }
+        }
+
+        // Content empty check
+        if (empty($postData['content'])) {
+            $errors['content'] = "Content is required.";
+        } else {
+            // Content length check
+            try {
+                self::string($postData['content'], 1);
+            } catch (\Exception $e) {
+                $errors['content'] = "There is an issue with the content.";
+            }
+        }
+
+        return $errors;
+    }
+
+
+    public static function isNoEmpty($value): bool
+    {
+        return $value;
     }
 }
