@@ -39,7 +39,7 @@
                     <select name="syntax" class="form-select" id="syntax">
                         <?php foreach ($syntaxes as $syntax): ?>
                             <option value="<?php echo htmlspecialchars($syntax['id']); ?>" <?php echo ($syntax['name'] === 'javascript') ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars(ucfirst($syntax['name'])); ?>
+                                <?php echo htmlspecialchars($syntax['name']); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
