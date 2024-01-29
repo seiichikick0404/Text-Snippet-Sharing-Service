@@ -6,6 +6,13 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Views\\' => array($baseDir . '/Views'),
+    'Routing\\' => array($baseDir . '/Routing'),
+    'Response\\' => array($baseDir . '/Response'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'Helpers\\' => array($baseDir . '/Helpers'),
     'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
+    'Exceptions\\' => array($baseDir . '/Exceptions'),
+    'Database\\' => array($baseDir . '/Database'),
+    'Commands\\' => array($baseDir . '/Commands'),
 );

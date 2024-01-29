@@ -11,24 +11,77 @@ class ComposerStaticInit662aedcc6781129fa81bbdd533343456
     );
 
     public static $prefixLengthsPsr4 = array (
+        'V' => 
+        array (
+            'Views\\' => 6,
+        ),
+        'R' => 
+        array (
+            'Routing\\' => 8,
+            'Response\\' => 9,
+        ),
         'P' => 
         array (
             'Psr\\Container\\' => 14,
+        ),
+        'H' => 
+        array (
+            'Helpers\\' => 8,
         ),
         'F' => 
         array (
             'Faker\\' => 6,
         ),
+        'E' => 
+        array (
+            'Exceptions\\' => 11,
+        ),
+        'D' => 
+        array (
+            'Database\\' => 9,
+        ),
+        'C' => 
+        array (
+            'Commands\\' => 9,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Views\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Views',
+        ),
+        'Routing\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Routing',
+        ),
+        'Response\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Response',
+        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'Helpers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Helpers',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
+        ),
+        'Exceptions\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Exceptions',
+        ),
+        'Database\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Database',
+        ),
+        'Commands\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Commands',
         ),
     );
 
