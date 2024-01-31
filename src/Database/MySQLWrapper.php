@@ -6,7 +6,7 @@ use mysqli;
 use Helpers\Settings;
 
 class MySQLWrapper extends mysqli{
-    public function __construct(?string $hostname = 'mysql', ?string $username = null, ?string $password = null, ?string $database = null, ?int $port = null, ?string $socket = null)
+    public function __construct(?string $hostname = null, ?string $username = null, ?string $password = null, ?string $database = null, ?int $port = null, ?string $socket = null)
     {
         /*
             接続の失敗時にエラーを報告し、例外をスローします。データベース接続を初期化する前にこの設定を行ってください。
@@ -17,6 +17,7 @@ class MySQLWrapper extends mysqli{
         $username = $username??Settings::env('DATABASE_USER');
         $password = $password??Settings::env('DATABASE_PASSWORD');
         $database = $database??Settings::env('DATABASE_NAME');
+        $hostname = $hostname??Settings::env('DATABASE_HOST');
 
         parent::__construct($hostname, $username, $password, $database, $port, $socket);
     }
