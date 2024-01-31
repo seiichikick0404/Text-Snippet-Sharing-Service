@@ -149,8 +149,8 @@ class DatabaseHelper
 
         $snippet['status'] = true;
         if ($snippet['expiration'] !== null) {
-            $expiration = new DateTime($snippet['expiration']);
-            $now = new DateTime();
+            $expiration = new \DateTime($snippet['expiration'], new \DateTimeZone('Asia/Tokyo'));
+            $now = new \DateTime('now', new \DateTimeZone('Asia/Tokyo'));
 
             // 有効期限が有効化チェック
             if ($expiration < $now) {
@@ -199,10 +199,10 @@ class DatabaseHelper
     private static function processExpiration($expiration): ?string
     {
         if ($expiration === 'forever') {
-            return null; // 永続的な場合はNULLを返す
+            return null;
         }
 
-        $now = new DateTime();
+        $now = new \DateTime('now', new \DateTimeZone('Asia/Tokyo'));
         switch ($expiration) {
             case '10min':
                 $now->modify('+10 minutes');
