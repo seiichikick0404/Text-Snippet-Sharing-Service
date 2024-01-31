@@ -2,10 +2,7 @@
 
 namespace Database\Seeds;
 
-require_once 'vendor/autoload.php';
-
 use Database\AbstractSeeder;
-use Faker\Factory;
 
 class SyntaxesInitSeeder extends AbstractSeeder {
 
