@@ -12,6 +12,12 @@ $routes = include('Routing/routes.php');
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $path = ltrim($path, '/');
 
+// ルートにアクセスしてきたらsnippet/createに遷移
+if ($path === "") {
+    header("Location: /snippet/create");
+    exit;
+}
+
 // ルートにパスが存在するかチェックする
 if (isset($routes[$path])) {
     // コールバックを呼び出してrendererを作成します。
