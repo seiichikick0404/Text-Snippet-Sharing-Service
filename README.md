@@ -111,7 +111,6 @@ http://localhost:8080/
   <img src="https://img.shields.io/badge/-JavaScript-F7DF1E.svg?logo=javascript&style=for-the-badge&logoColor=black">
   <!-- Amazon AWS -->
   <img src="https://img.shields.io/badge/-Amazon%20AWS-232F3E.svg?logo=amazon-aws&style=for-the-badge&logoColor=white">
-</p>
   <!-- Amazon EC2 -->
   <img src="https://img.shields.io/badge/-Amazon%20EC2-FF9900.svg?logo=amazonec2&style=for-the-badge&logoColor=white">
   <!-- Nginx -->
