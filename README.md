@@ -13,11 +13,8 @@
 https://text-snippet-sharing-service.seiprojects.com/snippet/create
 
 ## DEMO
+https://github.com/seiichikick0404/Text-Snippet-Sharing-Service/assets/69625901/a2306d39-a46d-4c7f-bcdd-8e9dde5ff367
 
-<video width="640" height="340" controls>
-  <source src="./public/demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
 ## 開発環境の構築
 
