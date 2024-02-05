@@ -15,7 +15,7 @@ https://text-snippet-sharing-service.seiprojects.com/snippet/create
 ## DEMO
 
 <video width="640" height="340" controls>
-  <source src="./public/demo1.mov" type="video/mp4">
+  <source src="./public/demo.mov" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
